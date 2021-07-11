@@ -96,6 +96,7 @@ repository:
             name: 'storage.type.imitator'
           }
           {include: '#automaton'}
+          {include: '#initialState'}
         ]
     }
   automaton:
@@ -156,3 +157,45 @@ repository:
         ]
       }
     ]
+  initialState:
+    {
+      begin: '\\b(init)'
+      end: '\\}'
+      beginCaptures:
+        0:
+          name: 'keyword.other.imitator'
+      name: 'meta.other.init.imitator'
+      patterns: [
+        {include: '#blockComment'}
+        {
+          begin: '\\b(discrete)'
+          end: ';'
+          beginCaptures:
+            0:
+              name: 'entity.other.init.attribute-name.imitator'
+          patterns: [
+            {include: '#blockComment'}
+            {include: '#valuesAndOperators'}
+            {
+              'match': '&'
+              'name': 'keyword.other.initseparator.imitator'
+            }
+          ]
+        }
+        {
+          begin: '\\b(continuous)'
+          end: ';'
+          beginCaptures:
+            0:
+              name: 'entity.other.init.attribute-name.imitator'
+          patterns: [
+            {include: '#blockComment'}
+            {include: '#valuesAndOperators'}
+            {
+              'match': '&'
+              'name': 'keyword.other.initseparator.imitator'
+            }
+          ]
+        }
+      ]
+    }
