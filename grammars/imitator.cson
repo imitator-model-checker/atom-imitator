@@ -1,0 +1,158 @@
+scopeName: 'source.imitator'
+name: 'IMITATOR'
+fileTypes: [ 'imi','imiprop' ]
+limitLineLength: false
+
+patterns: [
+  {include: '#values'}
+  {include: '#automaton'}
+  {include: '#header'}
+  {include: '#blockComment'}
+  # {include: '#variables'}
+]
+
+repository:
+  header:
+    # Block comments
+    {
+      comment: 'Block comment'
+      begin: '\\(\\*'
+      end: '\\*\\)'
+      name: 'comment.block.imitator'
+      patterns: [
+        {
+          comment: 'Model title'
+          match: '\\s+\\*\\s+\\b(IMITATOR MODEL)'
+          captures:
+            1:
+              name: 'markup.heading.1.imitator'
+        }
+        {
+          comment: 'File metadata'
+          match: '\\s+\\*\\s+(\\w+(\\s\\w+)*)\\s+\\:\\s+(.*)'
+          captures:
+            1:
+                name: 'markup.bold.imitator'
+            3:
+                name: 'markup.italic.imitator'
+          name: 'comment.block.imitator'
+        }
+      ]
+    }
+  blockComment:
+    {
+      comment: 'Block comment'
+      begin: '\\(\\*'
+      end: '\\*\\)'
+      name: 'comment.block.imitator'
+    }
+  valuesAndOperators:
+    patterns: [
+      {
+        comment: 'Constants'
+        match: '[^\\w+][0-9]+\\.?[0-9]*'
+        name: 'constant.numeric.imitator'
+      }
+      {
+        comment: 'True and False'
+        match: '\\b(true|false|True|False)'
+        name: 'constant.language.imitator'
+      }
+      {
+        'match': '\\+|-|\\*|/'
+        'name': 'keyword.operator.arithmetic.imitator'
+      }
+      {
+        'match': '<>|<=|>=|=|<|>'
+        'name': 'keyword.operator.comparison.imitator'
+      }
+      {
+        'match': '&'
+        'name': 'keyword.operator.logical.imitator'
+      }
+      {
+        'match': ':='
+        'name': 'keyword.operator.assignment.imitator'
+      }
+    ]
+  variables:
+    {
+      comment: 'Variables'
+      begin: '\\b(var)'
+      end: '\\b(automaton)' #TODO Find the way to end the variable block ....
+      beginCaptures:
+        0:
+          name: 'keyword.control.imitator'
+      endCaptures:
+        0:
+          name: 'markup.other.imtator'
+      name: 'meta.variable.imitiator'
+      patterns:
+        [
+          {include: '#blockComment'}
+          {include: '#valuesAndOperators'}
+          {
+            comment: 'Types'
+            match: '\\b(bool|clock|constant|discrete|int|parameter|International)'
+            name: 'storage.type.imitator'
+          }
+        ]
+    }
+  automaton:
+    {
+      comment: 'Automaton'
+      begin: '\\b(automaton)\\s+(\\w+)'
+      end: '\\b(end)'
+      beginCaptures:
+        1:
+          name: 'keyword.other.imitator'
+        2:
+          name: 'entity.other.automaton.imitator'
+      endCaptures:
+        0:
+          name: 'keyword.other.imitator'
+      patterns:
+        [
+          {include: '#blockComment'}
+          {
+            comment: 'Attributes'
+            match: '\\b(synclabs|accepting|urgent)'
+            name: 'entity.other.automaton.attribute-name'
+          }
+          {include: '#location'}
+        ]
+      name: 'meta.other.automaton.imitator'
+      }
+  location:
+    patterns: [
+      {
+        comment: 'Location'
+        match: '\\b(loc)\\s*([\\w0-9]+)'
+        captures:
+          1:
+            name: 'entity.other.automaton.attribute-name'
+          2:
+            name: 'variable.other.imitator'
+      }
+      {
+        match: '\\b(invariant)'
+        name: 'keyword.control.imitator'
+      }
+      {include: '#valuesAndOperators'}
+      {
+        begin: '\\b(when)'
+        end: '\\b(\\;)'
+        name: 'meta.tag.location.imitator'
+        beginCaptures:
+          0:
+            name: 'keyword.control.imitator'
+        patterns: [
+          {
+            comment: 'Locations data'
+            match: '\\b(sync|do|goto)'
+            name: 'keyword.control.imitator'
+          }
+          {include: '#valuesAndOperators'}
+        ]
+      }
+    ]
