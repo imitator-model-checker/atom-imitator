@@ -1,0 +1,17 @@
+{
+  "name": "language-imitator",
+  "version": "0.0.0",
+  "description": "Imitator syntax highlighting for Atom",
+  "repository": "https://github.com/DylanMarinho/atom-imitator",
+  "keywords": [
+    "syntax",
+    "highlighting",
+    "grammar",
+    "IMITATOR"
+  ],
+  "license": "GNU",
+  "bugs": "https://github.com/DylanMarinho/atom-imitator/issues",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}

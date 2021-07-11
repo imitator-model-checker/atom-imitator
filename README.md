@@ -1,0 +1,1 @@
+# IMITATOR syntax for Atom
