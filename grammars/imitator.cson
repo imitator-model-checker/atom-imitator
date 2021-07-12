@@ -84,7 +84,7 @@ repository:
           name: 'keyword.control.imitator'
       endCaptures:
         0:
-          name: 'markup.other.imtator'
+          name: 'keyword.control.imitator'
       # name: 'meta.variable.imitiator'
       patterns:
         [
