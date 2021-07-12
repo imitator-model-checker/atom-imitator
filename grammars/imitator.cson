@@ -7,6 +7,7 @@ patterns: [
   {include: '#values'}
   {include: '#header'}
   {include: '#blockComment'}
+  {include: '#properties'}
   {include: '#variables'}
 ]
 
@@ -196,6 +197,42 @@ repository:
               'name': 'keyword.other.initseparator.imitator'
             }
           ]
+        }
+      ]
+    }
+  properties:
+    {
+      comment: "Property"
+      begin: "\\b(property)"
+      end: ";"
+      beginCaptures:
+        1:
+          name: 'keyword.other.property.imitator'
+      name: 'meta.function.property.imitator'
+      patterns: [
+        {
+          comment: "Quantifier"
+          match: "#\\b(synth|exhibit|witness)"
+          name: "keyword.operator.property.quantifier.imitator"
+        }
+        {
+          comment: "Property"
+          match: "\\b(EF|AGnot|EFpmin|EFpmax|EFtmin|CycleThrough|Cycle|LoopThrough|Loop|NZCycle|DeadlockFree|IMconvex|IMK|IMunion|IM|InverseMethod|TracePreservation|PRP|BCcover|BCshuffle|BCrandom|BCrandomseq|PRPC|pattern)"
+          name: "entity.name.function.property.imitator"
+        }
+        {
+          comment:"Predicates"
+          match: "(\\b(loc\\[([a-zA-Z0-9]+)\\]\\s*(=|<>)\\s*([a-zA-Z0-9]+))|([a-zA-Z0-9]+)\\s*\\b(is( +not)? +in)\\s*([a-zA-Z0-9]+))"
+          captures:
+            3:
+              name: "variable.name.other.automaton.imitator"
+            5:
+              name: "variable.name.other.location.imitator"
+            6:
+              name: "variable.name.other.location.imitator"
+            9:
+              name: "variable.name.other.location.imitator"
+          name: "keyword.operator.property.predicates.imitator"
         }
       ]
     }
