@@ -210,6 +210,8 @@ repository:
           name: 'keyword.other.property.imitator'
       name: 'meta.function.property.imitator'
       patterns: [
+        {include: '#blockComment'}
+        {include: '#valuesAndOperators'}
         {
           comment: "Quantifier"
           match: "#\\b(synth|exhibit|witness)"
@@ -220,8 +222,9 @@ repository:
           match: "\\b(EF|AGnot|EFpmin|EFpmax|EFtmin|CycleThrough|Cycle|LoopThrough|Loop|NZCycle|DeadlockFree|IMconvex|IMK|IMunion|IM|InverseMethod|TracePreservation|PRP|BCcover|BCshuffle|BCrandom|BCrandomseq|PRPC|pattern)"
           name: "entity.name.function.property.imitator"
         }
+        # Predicates
         {
-          comment:"Predicates"
+          comment: "loc_predicate"
           match: "(\\b(loc\\[([a-zA-Z0-9]+)\\]\\s*(=|<>)\\s*([a-zA-Z0-9]+))|([a-zA-Z0-9]+)\\s*\\b(is( +not)? +in)\\s*([a-zA-Z0-9]+))"
           captures:
             3:
@@ -233,6 +236,26 @@ repository:
             9:
               name: "variable.name.other.location.imitator"
           name: "keyword.operator.property.predicates.imitator"
+        }
+        {
+          comment: "discrete_boolean_predicate"
+          match: ".*\\s+\\b(in)\\s*(\\[)\\s*.*\\s*(,|\\.\\.)\\s*.*(\\])"
+          captures:
+            1:
+              name: "keyword.operator.property.predicates.imitator"
+            2:
+              name: "keyword.operator.property.predicates.imitator"
+            3:
+              name: "keyword.operator.property.predicates.imitator"
+            4:
+              name: "keyword.operator.property.predicates.imitator"
+        }
+        # Patterns
+        {
+          match: '\\b(if|then|has happened|before|everytime|within|once|eventually|next|sequence|always)*'
+          captures:
+            1:
+              name: 'keyword.operator.property.patterns.imitator'
         }
       ]
     }
