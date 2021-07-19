@@ -1,6 +1,6 @@
 {
   "name": "language-imitator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Imitator syntax highlighting for Atom",
   "repository": "https://github.com/imitator-model-checker/atom-imitator",
   "keywords": [
