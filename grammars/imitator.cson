@@ -45,6 +45,7 @@ repository:
       begin: '\\(\\*'
       end: '\\*\\)'
       name: 'comment.block.imitator'
+      patterns: [{include: '#blockComment'}]
     }
   valuesAndOperators:
     patterns: [
