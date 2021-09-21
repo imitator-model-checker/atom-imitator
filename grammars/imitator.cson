@@ -94,7 +94,7 @@ repository:
           {include: '#valuesAndOperators'}
           {
             comment: 'Types'
-            match: '\\b(bool|clock|constant|discrete|int|parameter|International)'
+            match: '\\b(bool|clock|constant|discrete|int|parameter|rational)'
             name: 'storage.type.imitator'
           }
           {include: '#automaton'}
